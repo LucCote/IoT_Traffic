@@ -31,12 +31,14 @@ parent_path=$( cd "$(dirname "${BASH_SOURCE}")" ; pwd -P )
 cd "$parent_path"
 
 # Update the package manager and install base packages
+apt-get install sshd
 apt-get update --assume-yes
-# apt-get upgrade --assume-yes
 apt-get install --assume-yes emacs
 apt-get install --assume-yes vim
+# apt-get upgrade --assume-yes
 
 ### STEP 1: Wi-Fi Setup ###
+
 apt-get install --assume-yes hostapd dnsmasq
 
 cp ./config/dhcpcd.conf /etc/dhcpcd.conf
@@ -48,6 +50,8 @@ cp ./config/hostapd /etc/default/hostapd
 
 cp ./config/dnsmasq.conf /etc/dnsmasq.conf
 
+# Setup iptables for NAT
+
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
@@ -56,15 +60,22 @@ iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
 
 sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
+
 ifdown wlan0
 ifup wlan0
 
 service hostapd restart
 service dnsmasq restart
 
-# update-rc.d hostapd enable
-# update-rc.d dnsmasq enable
+# Ensure that services restart on reboot
+update-rc.d hostapd enable
+update-rc.d sshd enable
+update-rc.d dnsmasq enable
+update-rc.d dhcpcd enable
 
+echo "#!/bin/sh\n\niptables-restore /etc/iptables.ipv4.nat" > /etc/init.d/nat-startup.sh
+chmod +x /etc/init.d/nat-startup.sh
+update-rc.d nat-startup.sh defaults 100
 
 # ifdown wlan0
 # mv ./config/interfaces /etc/network/interfaces
@@ -96,8 +107,14 @@ service dnsmasq restart
 # update-rc.d isc-dhcp-server enable
 
 ## STEP 2: Dumpcap Setup ###
+
+# Install packages
 apt-get install --assume-yes tshark python-pip mongodb-server python-lxml libpcap-dev python-dev libxslt-dev libxml2-dev build-essential # tshark includes dumpcap
 pip install -r middlebox/requirements.txt
+
+# Give dumpcap privileges to run in non-root mode (helpful for wireshark analysis)
+setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' /usr/bin/dumpcap
+
 
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 sudo apt-get install -y nodejs
