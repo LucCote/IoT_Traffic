@@ -73,38 +73,9 @@ update-rc.d sshd enable
 update-rc.d dnsmasq enable
 update-rc.d dhcpcd enable
 
-echo "#!/bin/sh\n\niptables-restore /etc/iptables.ipv4.nat" > /etc/init.d/nat-startup.sh
+cp ./config/nat-startup.sh /etc/init.d/nat-startup.sh
 chmod +x /etc/init.d/nat-startup.sh
 update-rc.d nat-startup.sh defaults 100
-
-# ifdown wlan0
-# mv ./config/interfaces /etc/network/interfaces
-# ifconfig wlan0 192.168.12.1
-
-# # Restart wireless and the DHCP server
-# mv ./config/hostapd.conf /etc/hostapd/hostapd.conf
-# mv ./config/hostapd /etc/default/hostapd
-# mv ./config/dhcpcd.conf /etc/dhcp/dhcpcd.conf
-# mv ./config/isc-dhcp-server /etc/default/isc-dhcp-server
-
-# # Enable ipv4 forwarding
-# echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
-# sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
-
-# iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-# iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
-# iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
-
-# # Save the iptables routing rules
-# sh -c "iptables-save > /etc/iptables.ipv4.nat"
-
-# mv ./config/rc.local /etc/rc.local
-
-# service hostapd restart
-# service isc-dhcp-server restart
-
-# update-rc.d hostapd enable
-# update-rc.d isc-dhcp-server enable
 
 ## STEP 2: Dumpcap Setup ###
 
