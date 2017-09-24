@@ -31,10 +31,11 @@ parent_path=$( cd "$(dirname "${BASH_SOURCE}")" ; pwd -P )
 cd "$parent_path"
 
 # Update the package manager and install base packages
-apt-get install --assume-yes openssh-server
 apt-get update --assume-yes
+apt-get install --assume-yes openssh-server
 apt-get install --assume-yes emacs
 apt-get install --assume-yes vim
+apt-get install --assume-yes screen
 # apt-get upgrade --assume-yes
 
 ### STEP 1: Wi-Fi Setup ###
