@@ -13,7 +13,7 @@ Execute the following commands from the terminal of the Raspberry Pi:
 
 ```
 $ cd /home/pi
-$ git clone https://github.com/NoahApthorpe/iot-inspector
+$ git clone https://github.com/noise-lab/iot-inspector
 $ cd iot-inspector
 ```
 
