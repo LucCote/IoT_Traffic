@@ -81,7 +81,7 @@ update-rc.d nat-startup.sh defaults 100
 ## STEP 2: Dumpcap Setup ###
 
 # Install packages
-apt-get install --assume-yes tshark python-pip mongodb-server python-lxml libpcap-dev python-dev libxslt-dev libxml2-dev build-essential # tshark includes dumpcap
+apt-get install --assume-yes wireshark tshark python-pip mongodb-server python-lxml libpcap-dev python-dev libxslt-dev libxml2-dev build-essential # tshark includes dumpcap
 pip install -r middlebox/requirements.txt
 
 # Give dumpcap privileges to run in non-root mode (helpful for wireshark analysis)
