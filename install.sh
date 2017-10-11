@@ -38,7 +38,16 @@ apt-get install --assume-yes vim
 apt-get install --assume-yes screen
 # apt-get upgrade --assume-yes
 
-### STEP 1: Wi-Fi Setup ###
+## STEP 1: Dumpcap Setup ###
+
+# Install packages
+apt-get install --assume-yes wireshark tshark python-pip mongodb-server python-lxml libpcap-dev python-dev libxslt-dev libxml2-dev build-essential # tshark includes dumpcap
+pip install -r middlebox/requirements.txt
+
+# Give dumpcap privileges to run in non-root mode (helpful for wireshark analysis)
+setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' /usr/bin/dumpcap
+
+## STEP 2: Wi-Fi Setup ###
 
 apt-get install --assume-yes hostapd dnsmasq
 
@@ -61,7 +70,6 @@ iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
 
 sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
-
 ifdown wlan0
 ifup wlan0
 
@@ -78,15 +86,7 @@ cp ./config/nat-startup.sh /etc/init.d/nat-startup.sh
 chmod +x /etc/init.d/nat-startup.sh
 update-rc.d nat-startup.sh defaults 100
 
-## STEP 2: Dumpcap Setup ###
-
-# Install packages
-apt-get install --assume-yes wireshark tshark python-pip mongodb-server python-lxml libpcap-dev python-dev libxslt-dev libxml2-dev build-essential # tshark includes dumpcap
-pip install -r middlebox/requirements.txt
-
-# Give dumpcap privileges to run in non-root mode (helpful for wireshark analysis)
-setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' /usr/bin/dumpcap
-
+## Step 3: Node Setup
 
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 sudo apt-get install -y nodejs
@@ -96,9 +96,7 @@ cd web && npm install
 
 #bash /home/pi/iot-inspector/start.sh
 
-
 # update-rc.d mongod enable
-
 
 }
 
