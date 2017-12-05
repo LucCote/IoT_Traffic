@@ -37,10 +37,11 @@ This will prepare the configure and start the WiFi network and download the requ
 
 ## Usage Instructions
 
-Execute the following command from the `iot-inspector` directory to start capturing packets and displaying traffic information in a web interface:
+Execute the following command from the `iot-inspector` directory to start capturing packets and displaying traffic information in a web interface. The `tmux` command opens a new tmux window and allows the packet capture to continue running after you close the ssh session.
 
 ```
-$ sudo ../start.sh [output_directory]
+$ tmux
+$ sudo ../start.sh [output_directory] [pcap_filename]
 ```
 
-This will start capturing packets on the wireless interface of the Raspberry Pi and saving pcap files to `output_directory` (which may be a remote directory).
+This will start capturing packets on the wireless interface of the Raspberry Pi and saving pcap files to `output_directory/pcap_filename.pcap`. Use the command `[ctrl-b] d` to exit the tmux window.
