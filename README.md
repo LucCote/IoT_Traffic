@@ -37,7 +37,7 @@ This will prepare the configure and start the WiFi network and download the requ
 
 ## Usage Instructions
 
-Execute the following command from the `iot-inspector` directory to start capturing packets and displaying traffic information in a web interface. The `tmux` command opens a new tmux window and allows the packet capture to continue running after you close the ssh session.
+Execute the following command from the `iot-inspector` directory to start capturing packets and uploading the resultant pcap files to a remote directory. The `tmux` command opens a new tmux window and allows the packet capture to continue running after you close the ssh session.
 
 ```
 $ tmux
