@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # Check that arguments supplied
-if [ $# -lt 2 ] ; then
-    echo "Usage: ./start.sh output_directory pcap_filename"
+if [ $# -ne 6 ] ; then
+    echo "Usage: ./start.sh local_directory pcap_filename ssh_username ssh_server remote_directory ssh_password"
     exit 1
 fi
 
@@ -12,4 +12,5 @@ if [ "$EUID" -ne 0 ] ; then
     exit 1
 fi
 
+python directory_monitor "$1" "$3" "$4" "$5" "$6" &
 dumpcap -P -i wlan0 -w "$1/$2.pcap" -b filesize:100000 &

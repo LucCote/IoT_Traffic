@@ -41,8 +41,8 @@ apt-get install --assume-yes tmux
 ## STEP 1: Dumpcap Setup ###
 
 # Install packages
-apt-get install --assume-yes wireshark tshark python-pip mongodb-server python-lxml libpcap-dev python-dev libxslt-dev libxml2-dev build-essential # tshark includes dumpcap
-pip install -r middlebox/requirements.txt
+apt-get install --assume-yes wireshark tshark python-pip libpcap-dev python-dev # tshark includes dumpcap
+pip install -r requirements.txt
 
 # Give dumpcap privileges to run in non-root mode (helpful for wireshark analysis)
 setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' /usr/bin/dumpcap
