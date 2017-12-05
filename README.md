@@ -41,7 +41,7 @@ Execute the following command from the `iot-inspector` directory to start captur
 
 ```
 $ tmux
-$ sudo ../start.sh [output_directory] [pcap_filename]
+$ sudo ./start.sh [output_directory] [pcap_filename]
 ```
 
 This will start capturing packets on the wireless interface of the Raspberry Pi and saving pcap files to `output_directory/pcap_filename.pcap`. Use the command `[ctrl-b] d` to exit the tmux window.
