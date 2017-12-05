@@ -32,11 +32,11 @@ cd "$parent_path"
 
 # Update the package manager and install base packages
 apt-get update --assume-yes
+apt-get upgrade --assume-yes
 apt-get install --assume-yes openssh-server
 apt-get install --assume-yes emacs
 apt-get install --assume-yes vim
 apt-get install --assume-yes screen
-# apt-get upgrade --assume-yes
 
 ## STEP 1: Dumpcap Setup ###
 
@@ -85,18 +85,6 @@ update-rc.d dhcpcd enable
 cp ./config/nat-startup.sh /etc/init.d/nat-startup.sh
 chmod +x /etc/init.d/nat-startup.sh
 update-rc.d nat-startup.sh defaults 100
-
-## Step 3: Node Setup
-
-curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-sudo apt-get install -y nodejs
-
-cd web && npm install
-#cd "$parent_path"
-
-#bash /home/pi/iot-inspector/start.sh
-
-# update-rc.d mongod enable
 
 }
 
