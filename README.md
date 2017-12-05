@@ -8,6 +8,9 @@ The IoT Inspector was developed and tested for use on a Raspberry Pi v3.  It sho
 #### Connect to network
 Connect the Raspberry Pi to the Internet using a wired Ethernet connection.  You can then access the Raspberry Pi from your computer using ssh.
 
+#### Change user password
+The default password for the "pi" user (with sudo privileges) is "raspberry". You should change this using the `passwd` command if the pi has a public IP address or is on a LAN open to other users. 
+
 #### Download code
 Execute the following commands from the terminal of the Raspberry Pi:
 
@@ -34,29 +37,10 @@ This will prepare the configure and start the WiFi network and download the requ
 
 ## Usage Instructions
 
-Execute the following commands from the Raspberry Pi terminal to start capturing packets and displaying traffic information in a web interface:
+Execute the following command from the `iot-inspector` directory to start capturing packets and displaying traffic information in a web interface:
 
 ```
-$ cd /home/pi/iot-inspector/web
-$ sudo ../start.sh
+$ sudo ../start.sh [output_directory]
 ```
 
-This will start capturing packets on the wireless interface of the Raspberry Pi and saving pcap files to `/home`.
-It also starts Python backend code that parses the pcap files and stores
-processed data in a Mongo database. Finally, it starts a node.js webserver to display the data with a
-user-friendly interface.
-
-The web interface can then be accessed from your computer on \<Raspberry Pi IP\>:3000. You can find the IP address of the Raspberry Pi under `eth0` when you run `ifconfig` from the Raspberry Pi terminal.  If you want to view it directly on the
-Raspberry Pi, connect the Pi to monitor and run the command
-
-```
-$ startx
-```
-
-This  will launch the Raspberry Pi's  GUI desktop. Then start the
-default browser and type "localhost:3000" in the address bar.
-
-
-
-
-
+This will start capturing packets on the wireless interface of the Raspberry Pi and saving pcap files to `output_directory` (which may be a remote directory).
