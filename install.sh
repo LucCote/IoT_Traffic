@@ -36,7 +36,7 @@ apt-get upgrade --assume-yes
 apt-get install --assume-yes openssh-server
 apt-get install --assume-yes emacs
 apt-get install --assume-yes vim
-apt-get install --assume-yes screen
+apt-get install --assume-yes tmux
 
 ## STEP 1: Dumpcap Setup ###
 
