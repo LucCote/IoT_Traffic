@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 # Check that arguments supplied
-if [ $# -lt 2 ]
-  then
+if [ $# -lt 2 ] ; then
     echo "Usage: ./start.sh output_directory pcap_filename"
     exit 1
 fi
