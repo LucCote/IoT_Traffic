@@ -6,5 +6,5 @@ if [ $# -ne 6 ] ; then
     exit 1
 fi
 
-python directory_monitor "$1" "$3" "$4" "$5" "$6" &
+python directory_monitor.py "$1" "$3" "$4" "$5" "$6" &
 dumpcap -P -i wlan0 -w "$1/$2.pcap" -b filesize:10000 &
