@@ -33,8 +33,6 @@ cd "$parent_path"
 # Update the package manager and install base packages
 apt-get update --assume-yes
 apt-get install --assume-yes openssh-server
-apt-get install --assume-yes emacs
-apt-get install --assume-yes vim
 apt-get install --assume-yes tmux
 
 ## STEP 1: Dumpcap Setup ###
@@ -77,7 +75,6 @@ service dnsmasq restart
 
 # Ensure that services restart on reboot
 update-rc.d hostapd enable
-update-rc.d sshd enable
 update-rc.d dnsmasq enable
 update-rc.d dhcpcd enable
 
