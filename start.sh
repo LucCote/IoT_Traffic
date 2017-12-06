@@ -7,4 +7,4 @@ if [ $# -ne 6 ] ; then
 fi
 
 python directory_monitor "$1" "$3" "$4" "$5" "$6" &
-dumpcap -P -i wlan0 -w "$1/$2.pcap" -b filesize:100000 &
+dumpcap -P -i wlan0 -w "$1/$2.pcap" -b filesize:10000 &
