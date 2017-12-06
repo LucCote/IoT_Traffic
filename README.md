@@ -44,7 +44,7 @@ $ tmux
 $ sudo ./start.sh [local_directory] [pcap_filename] [ssh_username] [ssh_server] [remote_directory] [ssh_password]
 ```
 
-This will start capturing packets on the wireless interface of the Raspberry Pi and saving pcap files to `output_directory/pcap_filename.pcap`. 
+This will start capturing packets on the wireless interface of the Raspberry Pi and saving pcap files to `output_directory/pcap_filename.pcap`. Standard input and standard error will be redirected to `nohup.out`.
 
 Use the command `[ctrl-b] d` to exit the tmux window.
 
