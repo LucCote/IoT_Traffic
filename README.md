@@ -45,3 +45,12 @@ $ sudo ./start.sh [local_directory] [pcap_filename] [ssh_username] [ssh_server] 
 ```
 
 This will start capturing packets on the wireless interface of the Raspberry Pi and saving pcap files to `output_directory/pcap_filename.pcap`. Use the command `[ctrl-b] d` to exit the tmux window.
+
+To reattach to an existing session, run `tmux attach`.
+
+To stop data collection, run `ps` to find the PIDs of the `dumpcap` and `python` processes. Then run the following commands to send SIGINT to both
+
+```
+$ kill -2 [dumpcap_pid]
+$ kill -2 [python_pid]
+```
