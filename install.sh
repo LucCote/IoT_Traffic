@@ -32,7 +32,6 @@ cd "$parent_path"
 
 # Update the package manager and install base packages
 apt-get update --assume-yes
-#apt-get upgrade --assume-yes
 apt-get install --assume-yes openssh-server
 apt-get install --assume-yes emacs
 apt-get install --assume-yes vim
