@@ -45,7 +45,7 @@ pip install -r requirements.txt
 setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' /usr/bin/dumpcap
 
 ## STEP 2: Wi-Fi Setup ###
-
+echo hit1
 apt-get install --assume-yes hostapd dnsmasq
 
 cp ./config/dhcpcd.conf /etc/dhcpcd.conf
@@ -58,7 +58,7 @@ cp ./config/hostapd /etc/default/hostapd
 cp ./config/dnsmasq.conf /etc/dnsmasq.conf
 
 # Setup iptables for NAT
-
+echo hit2
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
@@ -69,15 +69,15 @@ sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
 ifdown wlan0
 ifup wlan0
-
+echo hit3
 service hostapd restart
 service dnsmasq restart
-
+echo hit4
 # Ensure that services restart on reboot
 update-rc.d hostapd enable
 update-rc.d dnsmasq enable
 update-rc.d dhcpcd enable
-
+echo hit5
 cp ./config/nat-startup.sh /etc/init.d/nat-startup.sh
 chmod +x /etc/init.d/nat-startup.sh
 update-rc.d nat-startup.sh defaults 100
