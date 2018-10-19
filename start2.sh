@@ -7,5 +7,5 @@ if [ "$EUID" -ne 0 ] ; then
 fi
 
 python /home/pi/iot-inspector/middlebox/FolderWatcher.py /home &
-dumpcap -P -i wlan0 -w /home/res.pcap -b duration:10 -b files:248 &
+dumpcap -P -i wlan0 -w /home/res.pcap -b duration:10 -b files:248 -c 15 &
 node /home/pi/iot-inspector/web/bin/www &
